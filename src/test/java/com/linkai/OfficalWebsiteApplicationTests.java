@@ -1,4 +1,4 @@
-package com.linyaosheng;
+package com.linkai;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
