@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linkai.dao.ProductDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+    <select id="showProduct" resultType="Product">
+        SELECT *
+        FROM product
+        WHERE buildtime = #{buildtime}
+    </select>
+
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="chapter.chapterId">
+        INSERT ignore INTO product (id , head , body , picture_path , buildtime)
+        VALUE (#{product.productId}, #{product.head}, #{product.body}, #{product.picture_path}, #{product.buildtime})
+    </insert>
+
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM product
+        WHERE id = #{productid}
+    </delete>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product
+        <set>
+            <if test="product.head != null and product.head != ''">
+                head = #{product.head},
+            </if>
+            <if test="product.body != null and product.body != ''">
+                body = #{product.body}
+            </if>
+            <if test="product.picture_path != null and product.picture_path != ''">
+                picture_path = #{product.picture_path}
+            </if>
+        </set>
+        WHERE id = #{product.productId}
+    </update>
+
+</mapper>
